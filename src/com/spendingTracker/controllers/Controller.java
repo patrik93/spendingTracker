@@ -7,18 +7,22 @@ public class Controller {
 
     @FXML
     BorderPane mainPane;
+    ContentA contentA;
+    ContentB contentB;
 
-
+    public Controller() {
+        contentA = new ContentA();
+        contentB = new ContentB(contentA.getData());
+    }
 
     @FXML
     public void onBtnAClick(){
-        ContentA contentA = new ContentA();
+        //ContentA contentA = new ContentA();
         mainPane.setCenter(contentA);
     }
 
     @FXML
     public void onBtnBClick(){
-        ContentB contentB = new ContentB();
         mainPane.setCenter(contentB);
     }
 
