@@ -13,11 +13,6 @@
             <Pane>
                 <TableView fx:id="tblTransactions" GridPane.rowIndex="1">
                     <columns>
-                        <TableColumn prefWidth="75.0" text="Date"/>
-                        <TableColumn prefWidth="130.0" text="Amount"/>
-                        <TableColumn prefWidth="130.0" text="Category(L1)"/>
-                        <TableColumn prefWidth="130.0" text="Category(L2)"/>
-                        <TableColumn prefWidth="130.0" text="Category(L3)"/>
                     </columns>
 <!--                    <columnResizePolicy>-->
 <!--                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>-->
