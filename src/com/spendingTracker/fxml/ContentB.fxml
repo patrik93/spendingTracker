@@ -25,7 +25,7 @@
                                 </FXCollections>
                             </items>
                         </ComboBox>
-                        <Button fx:id="btnAddValue" text="Add value"/>
+                        <Button fx:id="btnAddValue" text="Add value" onAction="#onBtnClickAdd"/>
                     </children>
                 </HBox>
             </children>
