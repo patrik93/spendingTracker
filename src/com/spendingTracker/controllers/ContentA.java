@@ -11,7 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -89,6 +89,11 @@ public class ContentA extends AnchorPane {
             comboSelectCategory.getSelectionModel().clearSelection();
             txtAmount.clear();
             datePicker.setValue(null);
+            try {
+                save();
+            }catch (IOException e){
+                System.out.println(e.getMessage());
+            }
         }else{
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
@@ -115,6 +120,11 @@ public class ContentA extends AnchorPane {
             if (result.isPresent() && result.get() == okButton) {
                 System.out.println("Yes pressed");
                 this.data.remove(tblTransactions.getSelectionModel().getSelectedItem());
+                try {
+                    save();
+                }catch (IOException e){
+                    System.out.println(e.getMessage());
+                }
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -124,6 +134,19 @@ public class ContentA extends AnchorPane {
             alert.showAndWait();
         }
 
+    }
+    public void save() throws IOException {
+        String path = "src/com/spendingTracker/files/";
+        File saveFile = new File(path+"saveFile.txt");
+        saveFile.createNewFile();
+        PrintWriter pw = new PrintWriter(new FileOutputStream(path+saveFile.getName()));
+        System.out.println(path+saveFile.getName());
+
+        for(Spendings items : this.data){
+            pw.println(items.getDate()+ ";"+items.getAmount()+ ";"+items.getCategory()+ ";");
+            System.out.println("Saving: "+ items.getDate()+ ";"+items.getAmount()+ ";"+items.getCategory()+ ";");
+        }
+        pw.close();
     }
 
 }
