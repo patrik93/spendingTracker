@@ -29,6 +29,8 @@ public class ContentA extends AnchorPane {
     ComboBox<String> comboSelectCategory;
     @FXML
     TextField txtAmount;
+    @FXML
+    DatePicker datePicker;
 
     public ObservableList<Spendings> getData() {
         return data;
@@ -81,15 +83,16 @@ public class ContentA extends AnchorPane {
 
     @FXML
     public void onBtnClickAdd() {
-        if (!txtAmount.getText().isEmpty() && comboSelectCategory.getSelectionModel().getSelectedItem() != null) {
-            this.data.add(new Spendings("2020-10-18", txtAmount.getText(), comboSelectCategory.getSelectionModel().getSelectedItem()));
+
+        if (datePicker.getValue() != null && !txtAmount.getText().isEmpty() && comboSelectCategory.getSelectionModel().getSelectedItem() != null) {
+            this.data.add(new Spendings(datePicker.getValue().toString(), txtAmount.getText(), comboSelectCategory.getSelectionModel().getSelectedItem()));
             comboSelectCategory.getSelectionModel().clearSelection();
             txtAmount.clear();
         }else{
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
             alert.setHeaderText(null);
-            alert.setContentText("Fill amount and select category!");
+            alert.setContentText("Fill amount and select category and date!");
             alert.showAndWait();
         }
 

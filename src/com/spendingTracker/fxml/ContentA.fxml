@@ -20,25 +20,29 @@
         </rowConstraints>
 
         <HBox GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <DatePicker fx:id="datePicker">
+            <HBox.margin>
+               <Insets right="10.0" />
+            </HBox.margin></DatePicker>
             <TextField fx:id="txtAmount">
                 <HBox.margin>
-                    <Insets right="10.0"/>
+                    <Insets right="10.0" />
                 </HBox.margin>
             </TextField>
             <ComboBox fx:id="comboSelectCategory">
                 <items>
-                    <FXCollections fx:factory="observableArrayList"/>
+                    <FXCollections fx:factory="observableArrayList" />
                 </items>
                 <HBox.margin>
-                    <Insets right="10.0"/>
+                    <Insets right="10.0" />
                 </HBox.margin>
             </ComboBox>
             <Button fx:id="btnAddValue" onAction="#onBtnClickAdd" text="Add value">
                 <HBox.margin>
-                    <Insets right="10.0"/>
+                    <Insets right="10.0" />
                 </HBox.margin>
             </Button>
-            <Button fx:id="btnRemoveValue" onAction="#onBtnClickRemove" text="Remove row"/>
+            <Button fx:id="btnRemoveValue" onAction="#onBtnClickRemove" text="Remove row" />
         </HBox>
         <VBox prefHeight="219.0" prefWidth="396.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
             <Pane>
