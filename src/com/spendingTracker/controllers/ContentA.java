@@ -88,6 +88,7 @@ public class ContentA extends AnchorPane {
             this.data.add(new Spendings(datePicker.getValue().toString(), txtAmount.getText(), comboSelectCategory.getSelectionModel().getSelectedItem()));
             comboSelectCategory.getSelectionModel().clearSelection();
             txtAmount.clear();
+            datePicker.setValue(null);
         }else{
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
