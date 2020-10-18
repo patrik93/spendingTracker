@@ -7,12 +7,17 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 public class ContentA extends AnchorPane {
@@ -20,6 +25,10 @@ public class ContentA extends AnchorPane {
     @FXML
     TableView<Spendings> tblTransactions;
     private ObservableList<Spendings> data;
+    @FXML
+    ComboBox<String> comboSelectCategory;
+    @FXML
+    TextField txtAmount;
 
     public ObservableList<Spendings> getData() {
         return data;
@@ -60,6 +69,47 @@ public class ContentA extends AnchorPane {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        try {
+            comboSelectCategory.getItems().clear();
+            Path path = Paths.get("src/com/spendingTracker/files/categories.txt");
+            List<String> categoryList = Files.lines(path).collect(Collectors.toList());
+            comboSelectCategory.setItems(FXCollections.observableArrayList(categoryList));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void onBtnClickAdd() {
+        this.data.add(new Spendings("2020-10-18", txtAmount.getText(), comboSelectCategory.getSelectionModel().getSelectedItem()));
+        System.out.println("Add button clicked with " + txtAmount.getText() + " and category " + comboSelectCategory.getSelectionModel().getSelectedItem());
+    }
+
+    @FXML
+    public void onBtnClickRemove() {
+        if (tblTransactions.getSelectionModel().getSelectedItem() != null) {
+            System.out.println("removed item + " + tblTransactions.getSelectionModel().getSelectedItem().toString());
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation");
+            alert.setHeaderText(null);
+            alert.setContentText("Are you sure to remove this row from your spendings?");
+            ButtonType okButton = new ButtonType("Yes", ButtonBar.ButtonData.YES);
+            ButtonType noButton = new ButtonType("No", ButtonBar.ButtonData.NO);
+            alert.getButtonTypes().setAll(okButton, noButton);
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == okButton) {
+                System.out.println("Yes pressed");
+                this.data.remove(tblTransactions.getSelectionModel().getSelectedItem());
+            }
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Select a row to remove it!");
+            alert.showAndWait();
+        }
+
     }
 
 }

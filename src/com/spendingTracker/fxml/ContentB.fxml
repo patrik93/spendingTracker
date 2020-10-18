@@ -5,31 +5,24 @@
 
 <?import javafx.collections.FXCollections?>
 <?import java.lang.String?>
-<fx:root prefHeight="600.0" prefWidth="900.0" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
-    <children>
-        <VBox>
-            <children>
-                <Label fx:id="lblCurrentPage" layoutX="31.0" layoutY="22.0" text="This is the page B" />
-            </children>
-        </VBox>
-        <VBox>
-            <children>
-                <HBox>
-                    <children>
-                        <TextField fx:id="txtAmount"/>
-                        <ComboBox fx:id="comboSelectCategory">
-                            <items>
-                                <FXCollections fx:factory="observableArrayList">
-                                    <String fx:value="Item 2" />
-                                    <String fx:value="Item 3" />
-                                </FXCollections>
-                            </items>
-                        </ComboBox>
-                        <Button fx:id="btnAddValue" text="Add value" onAction="#onBtnClickAdd"/>
-                    </children>
-                </HBox>
-            </children>
-        </VBox>
-    </children>
+<fx:root prefHeight="600.0" prefWidth="900.0" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.2-internal"
+         xmlns:fx="http://javafx.com/fxml/1">
 
+    <VBox>
+        <Label fx:id="lblCurrentPage" layoutX="31.0" layoutY="22.0" text="This is the page B"/>
+    </VBox>
+    <VBox>
+        <HBox>
+            <TextField fx:id="txtAmount"/>
+            <ComboBox fx:id="comboSelectCategory">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Item 2"/>
+                        <String fx:value="Item 3"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
+            <!--                        <Button fx:id="btnAddValue" text="Add value" onAction="#onBtnClickAdd"/>-->
+        </HBox>
+    </VBox>
 </fx:root>

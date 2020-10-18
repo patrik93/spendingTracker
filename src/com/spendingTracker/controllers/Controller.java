@@ -12,7 +12,7 @@ public class Controller {
 
     public Controller() {
         contentA = new ContentA();
-        contentB = new ContentB(contentA.getData());
+        contentB = new ContentB();
     }
 
     @FXML

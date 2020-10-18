@@ -1,24 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root prefHeight="600.0" prefWidth="900.0" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.2-internal"
-         xmlns:fx="http://javafx.com/fxml/1">
-    <VBox>
-        <children>
+<fx:root prefHeight="600.0" prefWidth="900.0" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+    <GridPane vgap="10">
+        <padding>
+            <Insets left="10" top="10" />
+        </padding>
+        <columnConstraints>
+            <ColumnConstraints maxWidth="-Infinity" minWidth="50" />
+            <ColumnConstraints maxWidth="-Infinity" minWidth="50" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+        </rowConstraints>
+
+        <HBox GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <TextField fx:id="txtAmount">
+                <HBox.margin>
+                    <Insets right="10.0"/>
+                </HBox.margin>
+            </TextField>
+            <ComboBox fx:id="comboSelectCategory">
+                <items>
+                    <FXCollections fx:factory="observableArrayList"/>
+                </items>
+                <HBox.margin>
+                    <Insets right="10.0"/>
+                </HBox.margin>
+            </ComboBox>
+            <Button fx:id="btnAddValue" onAction="#onBtnClickAdd" text="Add value">
+                <HBox.margin>
+                    <Insets right="10.0"/>
+                </HBox.margin>
+            </Button>
+            <Button fx:id="btnRemoveValue" onAction="#onBtnClickRemove" text="Remove row"/>
+        </HBox>
+        <VBox prefHeight="219.0" prefWidth="396.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
             <Pane>
-                <Label fx:id="lblCurrentPage" layoutX="31.0" layoutY="22.0" text="This is the page A"/>
+                <Label fx:id="lblCurrentPage" layoutX="31.0" layoutY="22.0" text="This is the page A" />
             </Pane>
             <Pane>
                 <TableView fx:id="tblTransactions" GridPane.rowIndex="1">
                     <columns>
                     </columns>
-<!--                    <columnResizePolicy>-->
-<!--                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>-->
-<!--                    </columnResizePolicy>-->
+                    <!--                    <columnResizePolicy>-->
+                    <!--                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>-->
+                    <!--                    </columnResizePolicy>-->
                 </TableView>
             </Pane>
-        </children>
-    </VBox>
+        </VBox>
+
+    </GridPane>
+
+
 </fx:root>
