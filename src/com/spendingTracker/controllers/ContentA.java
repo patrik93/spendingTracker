@@ -15,6 +15,8 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -57,11 +59,11 @@ public class ContentA extends AnchorPane {
             TableColumn<Spendings, String> categoryCol = new TableColumn<>("Category");
             categoryCol.setCellValueFactory(new PropertyValueFactory<>("Category"));
 
-
-            data.add(new Spendings("2020-10-17", "100", "Fueling"));
-            data.add(new Spendings("2020-10-17", "200", "Grocery"));
-            data.add(new Spendings("2020-10-17", "300", "Fueling"));
-            data.add(new Spendings("2020-10-17", "400", "Fueling"));
+            data = load();
+//            data.add(new Spendings("2020-10-17", "100", "Fueling"));
+//            data.add(new Spendings("2020-10-17", "200", "Grocery"));
+//            data.add(new Spendings("2020-10-17", "300", "Fueling"));
+//            data.add(new Spendings("2020-10-17", "400", "Fueling"));
 
             dateCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDate()));
             amountCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAmount()));
@@ -91,10 +93,10 @@ public class ContentA extends AnchorPane {
             datePicker.setValue(null);
             try {
                 save();
-            }catch (IOException e){
+            } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
-        }else{
+        } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
             alert.setHeaderText(null);
@@ -122,7 +124,7 @@ public class ContentA extends AnchorPane {
                 this.data.remove(tblTransactions.getSelectionModel().getSelectedItem());
                 try {
                     save();
-                }catch (IOException e){
+                } catch (IOException e) {
                     System.out.println(e.getMessage());
                 }
             }
@@ -135,18 +137,47 @@ public class ContentA extends AnchorPane {
         }
 
     }
+
     public void save() throws IOException {
         String path = "src/com/spendingTracker/files/";
-        File saveFile = new File(path+"saveFile.txt");
-        saveFile.createNewFile();
-        PrintWriter pw = new PrintWriter(new FileOutputStream(path+saveFile.getName()));
-        System.out.println(path+saveFile.getName());
+        File saveFile = new File(path + "saveFile.txt");
+        //saveFile.createNewFile();
+        PrintWriter pw = new PrintWriter(new FileOutputStream(path + saveFile.getName()));
+        System.out.println(path + saveFile.getName());
 
-        for(Spendings items : this.data){
-            pw.println(items.getDate()+ ";"+items.getAmount()+ ";"+items.getCategory()+ ";");
-            System.out.println("Saving: "+ items.getDate()+ ";"+items.getAmount()+ ";"+items.getCategory()+ ";");
+        for (Spendings items : this.data) {
+            pw.println(items.getDate() + ";" + items.getAmount() + ";" + items.getCategory() + ";");
+            System.out.println("Saving: " + items.getDate() + ";" + items.getAmount() + ";" + items.getCategory() + ";");
         }
         pw.close();
     }
+
+    public ObservableList<Spendings> load() {
+        Collection<Spendings> list;
+        ObservableList<Spendings> test = FXCollections.observableArrayList();
+        try {
+            list = Files.readAllLines(new File("src/com/spendingTracker/files/saveFile.txt")
+                    .toPath())
+                    .stream().map(line -> {
+                        String[] details = line.split(";");
+                        return new Spendings(details[0], details[1], details[2]);
+                    }).collect(Collectors.toList());
+            test = FXCollections.observableArrayList(list);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }return test;
+
+    }
+
+    @FXML
+    public void onBtnClickLoad() {
+        ObservableList<Spendings> test = load();
+        for(Spendings item : test){
+            System.out.println(item.getDate()+";"+item.getAmount()+";"+item.getCategory());
+        }
+
+    }
+
 
 }

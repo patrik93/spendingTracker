@@ -42,7 +42,11 @@
                     <Insets right="10.0" />
                 </HBox.margin>
             </Button>
-            <Button fx:id="btnRemoveValue" onAction="#onBtnClickRemove" text="Remove row" />
+            <Button fx:id="btnRemoveValue" onAction="#onBtnClickRemove" text="Remove row" >
+            <HBox.margin>
+                <Insets right="10.0" />
+            </HBox.margin></Button>
+            <Button fx:id="btnLoad" onAction="#onBtnClickLoad" text="Load (debug)" />
         </HBox>
         <VBox prefHeight="219.0" prefWidth="396.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
             <Pane>
