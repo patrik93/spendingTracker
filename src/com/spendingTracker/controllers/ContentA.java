@@ -82,7 +82,9 @@ public class ContentA extends AnchorPane {
     @FXML
     public void onBtnClickAdd() {
         this.data.add(new Spendings("2020-10-18", txtAmount.getText(), comboSelectCategory.getSelectionModel().getSelectedItem()));
-        System.out.println("Add button clicked with " + txtAmount.getText() + " and category " + comboSelectCategory.getSelectionModel().getSelectedItem());
+        comboSelectCategory.getSelectionModel().clearSelection();
+        txtAmount.clear();
+//        System.out.println("Add button clicked with " + txtAmount.getText() + " and category " + comboSelectCategory.getSelectionModel().getSelectedItem());
     }
 
     @FXML

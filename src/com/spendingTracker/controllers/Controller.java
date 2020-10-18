@@ -17,7 +17,6 @@ public class Controller {
 
     @FXML
     public void onBtnAClick(){
-        //ContentA contentA = new ContentA();
         mainPane.setCenter(contentA);
     }
 
