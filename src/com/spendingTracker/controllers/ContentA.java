@@ -81,9 +81,18 @@ public class ContentA extends AnchorPane {
 
     @FXML
     public void onBtnClickAdd() {
-        this.data.add(new Spendings("2020-10-18", txtAmount.getText(), comboSelectCategory.getSelectionModel().getSelectedItem()));
-        comboSelectCategory.getSelectionModel().clearSelection();
-        txtAmount.clear();
+        if (!txtAmount.getText().isEmpty() && comboSelectCategory.getSelectionModel().getSelectedItem() != null) {
+            this.data.add(new Spendings("2020-10-18", txtAmount.getText(), comboSelectCategory.getSelectionModel().getSelectedItem()));
+            comboSelectCategory.getSelectionModel().clearSelection();
+            txtAmount.clear();
+        }else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Fill amount and select category!");
+            alert.showAndWait();
+        }
+
 //        System.out.println("Add button clicked with " + txtAmount.getText() + " and category " + comboSelectCategory.getSelectionModel().getSelectedItem());
     }
 
@@ -103,8 +112,7 @@ public class ContentA extends AnchorPane {
                 System.out.println("Yes pressed");
                 this.data.remove(tblTransactions.getSelectionModel().getSelectedItem());
             }
-        }
-        else {
+        } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
             alert.setHeaderText(null);
